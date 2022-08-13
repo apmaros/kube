@@ -7,5 +7,5 @@ It is recommended to use following tools:
 - k9s - <https://k9scli.io/>
 
 ## Docs
-1. [Kube Notes][docs/kube-notes.md]
+1. [Kube Notes](docs/kube-notes.md)
 
