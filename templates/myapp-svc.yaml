@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-svc
+spec:
+  selector:
+    app.kubernetes.io/name: myapp
+  ports:
+    - name: http-web
+      protocol: TCP
+      port: 80
+      targetPort: http-web-svc
+

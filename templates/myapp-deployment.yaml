@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  labels:
+    type: web-app
+    app.kubernetes.io/name: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: myapp
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: apmaros/myapp:latest
+        ports:
+          - containerPort: 5050
+            name: http-web-svc
+
