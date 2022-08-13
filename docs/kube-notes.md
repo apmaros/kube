@@ -52,8 +52,7 @@ Deployment is used to described a desired state of the app. The state can be for
 
 A port definition in Pod can have a name. This name can be referenced in the `targetPort` attribute of a Service.
 
-```
-
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -83,7 +82,7 @@ spec:
 
 A service exposes a pod as a network service. The set of Pods targeted by a Service is usually determined by a selector. In this case we use selector `app.kubernetes.io/name: myapp`
 
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
