@@ -62,7 +62,17 @@ static_resources:
                 port_value: 5050
 ```
 
+To expose a local Envoy admin inteface can be done by applying following configuration:
+
+```yaml
+admin:
+  address:
+    socket_address:
+      address: 0.0.0.0
+      port_value: 9901
+```
 
 # Reference
 
 - <https://www.tetrate.io/blog/get-started-with-envoy-in-5-minutes/>
+- <https://www.envoyproxy.io/docs/envoy/latest/operations/admin>

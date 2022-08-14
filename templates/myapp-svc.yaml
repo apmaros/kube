@@ -10,4 +10,8 @@ spec:
       protocol: TCP
       port: 80
       targetPort: envoy-web
+    - name: admin
+      protocol: TCP
+      port: 81
+      targetPort: envoy-admin
 
