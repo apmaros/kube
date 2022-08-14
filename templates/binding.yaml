@@ -10,5 +10,3 @@ subjects:
   - kind: ServiceAccount
     name: saapp1
     namespace: default
-
-
