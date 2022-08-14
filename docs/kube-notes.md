@@ -52,6 +52,8 @@ Deployment is used to described a desired state of the app. The state can be for
 
 A port definition in Pod can have a name. This name can be referenced in the `targetPort` attribute of a Service.
 
+In this case the traffic is not routed to the app directly but we are using Envoy side car proxying the ingress traffic to the app. You can read more about the proxy in [Envoy](envoy.md).
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -61,7 +63,7 @@ metadata:
     type: web-app
     app.kubernetes.io/name: myapp
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: myapp
@@ -76,6 +78,30 @@ spec:
         ports:
           - containerPort: 5050
             name: http-web-svc
+        volumeMounts:
+          - name: envoy-config-volume
+            mountPath: /etc/envoy-config/
+      - name: envoy
+        image: envoyproxy/envoy:v1.22-latest
+        ports:
+          - containerPort: 9901
+            protocol: TCP
+            name: envoy-admin
+          - containerPort: 9900
+            protocol: TCP
+            name: envoy-web
+        volumeMounts:
+          - name: envoy-config-volume
+            mountPath: /etc/envoy-config/
+        command: ["/usr/local/bin/envoy"]
+        args: ["-c", "/etc/envoy-config/enovy-config.yaml", "-l", "info","--service-cluster","servicea","--service-node","servicea", "--log-format", "[METADATA][%Y-%m-%d %T.%e][%t][%l][%n] %v"]
+      volumes:
+        - name: envoy-config-volume
+          configMap:
+            name: sidecar-config
+            items:
+              - key: envoy-config.yaml
+                path: enovy-config.yaml
 ```
 
 ## Service
@@ -94,7 +120,7 @@ spec:
     - name: http-web
       protocol: TCP
       port: 80
-      targetPort: http-web-svc
+      targetPort: envoy-web
 ```
 
 ## Selectors
