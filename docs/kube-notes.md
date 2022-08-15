@@ -93,6 +93,24 @@ spec:
         volumeMounts:
           - name: envoy-config-volume
             mountPath: /etc/envoy-config/
+        livenessProbe:
+          httpGet:
+            path: /stats
+            port: 9901
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 9901
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
         command: ["/usr/local/bin/envoy"]
         args: ["-c", "/etc/envoy-config/enovy-config.yaml", "-l", "info","--service-cluster","servicea","--service-node","servicea", "--log-format", "[METADATA][%Y-%m-%d %T.%e][%t][%l][%n] %v"]
       volumes:
@@ -102,6 +120,7 @@ spec:
             items:
               - key: envoy-config.yaml
                 path: enovy-config.yaml
+
 ```
 
 ## Service
@@ -125,6 +144,26 @@ spec:
 
 ## Selectors
 Labels are key/value pairs that are attached to objects, such as pods
+
+## Liveness and Readiness Probes
+
+**Readiness** - to know when the container is ready to start acceppting traffic, when fails application is removed from traffic
+
+**Liveness** - application is in healthy state, when fails application is restarted
+
+Example of a probe:
+
+```yaml
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 9901
+failureThreshold: 3
+initialDelaySeconds: 5
+periodSeconds: 10
+successThreshold: 1
+timeoutSeconds: 5
+```
 
 ## Reference
 - https://kubernetes.io/

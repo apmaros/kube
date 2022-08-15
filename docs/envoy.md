@@ -19,6 +19,11 @@ Operates on HTTP level and can manipulate HTTP requests and responses.
 
 ## Envoy Config
 
+Envoy configuration requires specifying:
+- listeners
+- clusters
+- static resources
+
 Below is Envoy configuration proxying traffic to port `5050` on localhost
 
 ```yaml
@@ -62,7 +67,7 @@ static_resources:
                 port_value: 5050
 ```
 
-To expose a local Envoy admin inteface can be done by applying following configuration:
+To expose a local Envoy admin inteface can be done by adding onfiguration:
 
 ```yaml
 admin:
@@ -72,7 +77,8 @@ admin:
       port_value: 9901
 ```
 
+
 # Reference
 
 - <https://www.tetrate.io/blog/get-started-with-envoy-in-5-minutes/>
-- <https://www.envoyproxy.io/docs/envoy/latest/operations/admin>
+- <https://www.envoyproxy.io/docs/envoy/latest/>
