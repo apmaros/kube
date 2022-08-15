@@ -7,5 +7,6 @@ It is recommended to use following tools:
 - k9s - <https://k9scli.io/>
 
 ## Docs
-1. [Kube Notes](docs/kube-notes.md)
-2. [Envoy](docs/envoy.md)
+- [Kube Notes](docs/kube-notes.md)
+- [Kubectl Cheatsheet](docs/kubectl-cheatsheet.md)
+- [Envoy](docs/envoy.md)
