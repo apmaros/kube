@@ -27,3 +27,7 @@ ssh to container<br>
 ## Tip
 
 Alias `kubectl` to `k`, it will make typing much faster
+
+## References
+
+- https://kubernetes.io/docs/reference/kubectl/cheatsheet/#kubectl-context-and-configuration
