@@ -1,6 +1,6 @@
 # Kube
 
-Kube project walks trough core kubernetes concepts with  working examples. All example used in documentation are in [/templates] directory.
+Kube project walks trough core kubernetes concepts with  working examples. All example used in documentation are in [templates](templates) directory.
 
 It is recommended to use following tools:
 - kubectl - <https://kubernetes.io/docs/tasks/tools/>
