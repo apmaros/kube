@@ -10,3 +10,5 @@ It is recommended to use following tools:
 - [Kube Notes](docs/kube-notes.md)
 - [Kubectl Cheatsheet](docs/kubectl-cheatsheet.md)
 - [Envoy](docs/envoy.md)
+- [Redis as StatefulSet](docs/redis-as-stateful-set.md)
+
