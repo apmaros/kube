@@ -142,6 +142,35 @@ spec:
       targetPort: envoy-web
 ```
 
+## Ingress
+Ingress exposes HTTP and HTTPS routes to the outside traffic. It redirects incoming 
+traffic from ingress controller to a network service. Ingress controller is typically 
+a load balancer accepting external traffic. Ingress is a rule connecting the load 
+balancer with a service endpoints.
+
+```yml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapp
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: public
+  rules:
+  - http:
+      paths:
+        # Redirect sub paths
+      - path: "/(/|$)(.*)"
+        pathType: Prefix
+        backend:
+          service:
+            name: myapp-svc
+            port:
+              name: http-web
+```
+
 ## Selectors
 Labels are key/value pairs that are attached to objects, such as pods
 
@@ -165,6 +194,8 @@ successThreshold: 1
 timeoutSeconds: 5
 ```
 
+
 ## Reference
 - https://kubernetes.io/
 - https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+- https://github.com/kubernetes/ingress-nginx/blob/main/README.md#readme
